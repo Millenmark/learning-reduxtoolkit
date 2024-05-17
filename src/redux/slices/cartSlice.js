@@ -1,15 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  products: [
-    { name: "Apple", price: 10 },
-    { name: "Orange", price: 14 },
-    { name: "Mango", price: 29 },
-    { name: "Grapes", price: 56 },
-  ],
-
-  cart: [],
+  cartItems: [],
+  amount: 0,
   total: 0,
+  isLoading: true,
 };
 
 const cartSlice = createSlice({
@@ -17,13 +12,18 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, { payload }) => {
-      state.cart = [...state.cart, payload];
+      state.cartItems = [...state.cartItems, payload];
       state.total = state.total + payload.price;
     },
-    removeFromCart: (state, {payload}) => {
-      state.cart = state.cart.filter((i, index) => index !== payload.index)
-      state.total = state.total - payload.price
-    }
+    removeFromCart: (state, { payload }) => {
+      state.cartItems = state.cartItems.filter(
+        (i, index) => index !== payload.index
+      );
+      state.total = state.total - payload.price;
+    },
+    clearCart: (state) => {
+      state.cartItems = [];
+    },
   },
 });
 

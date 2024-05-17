@@ -4,7 +4,11 @@ import { addToCart, removeFromCart } from "./redux/slices/cartSlice";
 
 function App() {
   const dispatch = useDispatch();
-  const { products, cart, total } = useSelector((state) => state.xxx);
+  const {
+    products,
+    cartItems: cart,
+    total,
+  } = useSelector((state) => state.xxx);
 
   const handlePurchase = (e) => {
     let name = e.target.options[e.target.selectedIndex].text;
